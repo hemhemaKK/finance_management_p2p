@@ -1,70 +1,81 @@
-# Getting Started with Create React App
+# 💻 Personal Finance & P2P Payment System - Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![Project Status](https://img.shields.io/badge/status-completed-brightgreen)
+![React](https://img.shields.io/badge/React-v18.2.0-blue)
+![Vite](https://img.shields.io/badge/Vite-v5.1.0-yellow)
+![License](https://img.shields.io/badge/license-MIT-blue)
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 🚀 Overview
 
-### `npm start`
+A **modern, responsive, and interactive frontend** for managing personal finances and performing secure peer-to-peer (P2P) payments.  
+Track expenses, budgets, goals, and transfer money effortlessly with a user-friendly interface.  
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## ✨ Features Implemented
 
-### `npm test`
+### 🏠 Dashboard
+- ✅ View summary of expenses, income, and P2P transfers  
+- ✅ Quick stats on budgets, goals, and transaction history  
+- ✅ Interactive charts and graphs for spending trends  
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 💵 Expense & Income Management
+- ✅ Add, edit, and delete transactions  
+- ✅ Categorize transactions (groceries, salary, bills, etc.)  
+- ✅ Filter by date, category, or amount  
 
-### `npm run build`
+### 📊 Budget Management
+- ✅ Set and track monthly or yearly budgets  
+- ✅ Visual feedback on spending progress  
+- ✅ Notifications when approaching budget limits  
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 🎯 Financial Goals
+- ✅ Set personal financial goals  
+- ✅ Track progress with interactive visuals  
+- ✅ Mark goals as achieved  
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 💸 P2P Transfers
+- ✅ Send money securely to other users  
+- ✅ Request payments from friends  
+- ✅ View transfer history (pending & completed)  
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 🔔 Notifications & Alerts
+- ✅ Alerts for successful transfers, failed payments, or budget limits  
+- ✅ Real-time feedback for interactive user experience  
 
-### `npm run eject`
+### 🎨 User Interface
+- ✅ Responsive design for desktop & mobile  
+- ✅ Colorful, modern, and interactive UI  
+- ✅ Animations for buttons, forms, and dashboards  
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 🛠️ Tech Stack
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- **Framework:** React.js (Vite)  
+- **State Management:** Redux Toolkit / Context API  
+- **Routing:** React Router DOM  
+- **Styling:** CSS / Styled Components / Inline CSS  
+- **Charts & Analytics:** Chart.js / Recharts  
+- **HTTP Requests:** Axios  
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+## ⚡ Getting Started
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Prerequisites
+- Node.js >= 18  
+- npm or yarn  
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Installation
+```bash
+# Clone repository
+git clone https://github.com/your-username/finance_management_p2p.git
+cd finance_management_p2p
+# Install dependencies
+npm install
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+# Start development server
+npm run dev
