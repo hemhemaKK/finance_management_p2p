@@ -6,18 +6,18 @@ const config = {
 };
 
 export const getProfile = async () => {
-  const res = await axios.get("http://localhost:5000/api/profile", config);
+  const res = await axios.get("https://personal-finance-p2p-backend.onrender.com/api/profile", config);
   return res.data;
 };
 
 export const sendOtp = async (phone) => {
-  const res = await axios.post("http://localhost:5000/api/profile/send-otp", { phone }, config);
+  const res = await axios.post("https://personal-finance-p2p-backend.onrender.com/api/profile/send-otp", { phone }, config);
   return res.data;
 };
 
 export const verifyOtp = async (phone, enteredOtp) => {
   const res = await axios.post(
-    "http://localhost:5000/api/profile/verify-otp",
+    "https://personal-finance-p2p-backend.onrender.com/api/profile/verify-otp",
     { phone, enteredOtp },
     config
   );
@@ -28,7 +28,7 @@ export const verifyOtp = async (phone, enteredOtp) => {
 export const updateProfilePic = async (imageUrl) => {
   const token = localStorage.getItem("token");
   const { data } = await axios.post(
-    `http://localhost:5000/api/profile/update-pic`,
+    `https://personal-finance-p2p-backend.onrender.com/api/profile/update-pic`,
     { imageUrl },
     { headers: { Authorization: `Bearer ${token}` } }
   );

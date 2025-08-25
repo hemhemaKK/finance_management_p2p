@@ -1,9 +1,9 @@
 import axios from "axios";
 
-const API = "http://localhost:5000/api/payment";
+const API = "https://personal-finance-p2p-backend.onrender.com/api/payment";
 
 export const verifyUser = (email) =>
-  axios.get(`http://localhost:5000/api/payment/verify-user?email=${email}`);
+  axios.get(`https://personal-finance-p2p-backend.onrender.com/api/payment/verify-user?email=${email}`);
 
 export const createOrder = (data, token) =>
   axios.post(`${API}/create-order`, data, {

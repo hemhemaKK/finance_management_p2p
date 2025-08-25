@@ -1,7 +1,7 @@
 // src/api/budgetApi.js
 import axios from "axios";
 
-const API = "http://localhost:5000/api/budget";
+const API = "https://personal-finance-p2p-backend.onrender.com/api/budget";
 
 // Add new budget plan
 export const createBudget = (data, token) =>
