@@ -22,7 +22,7 @@ const BudgetPlan = () => {
 
   const fetchBudgets = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/budget/budgets", config);
+      const res = await axios.get("https://personal-finance-p2p-backend.onrender.com/api/budget/budgets", config);
       const budgetsWithRemaining = res.data.map((b) => {
         const start = new Date(b.startDate);
         const end = new Date(start);
@@ -55,7 +55,7 @@ const BudgetPlan = () => {
 
     try {
       await axios.post(
-        "http://localhost:5000/api/budget/budget",
+        "https://personal-finance-p2p-backend.onrender.com/api/budget/budget",
         {
           category: selectedCategory,
           limit: Number(limit),
@@ -86,7 +86,7 @@ const BudgetPlan = () => {
     if (!window.confirm("Are you sure you want to delete this budget?")) return;
 
     try {
-      await axios.delete(`http://localhost:5000/api/budget/budget/${id}`, config);
+      await axios.delete(`https://personal-finance-p2p-backend.onrender.com/api/budget/budget/${id}`, config);
       fetchBudgets();
     } catch (err) {
       console.error("Delete budget error:", err);

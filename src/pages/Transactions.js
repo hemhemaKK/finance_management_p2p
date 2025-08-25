@@ -10,7 +10,7 @@ const TransactionHistory = () => {
     const fetchUserAndTransactions = async () => {
       try {
         const token = localStorage.getItem("token");
-        const profileRes = await axios.get("http://localhost:5000/api/profile", {
+        const profileRes = await axios.get("https://personal-finance-p2p-backend.onrender.com/api/profile", {
           headers: { Authorization: `Bearer ${token}` },
         });
         const user = profileRes.data.user;
@@ -27,7 +27,7 @@ const TransactionHistory = () => {
   const fetchTransactions = async (filterValue, token = localStorage.getItem("token")) => {
     try {
       const res = await axios.get(
-        `http://localhost:5000/api/payment/transactions?filter=${filterValue}`,
+        `https://personal-finance-p2p-backend.onrender.com/api/payment/transactions?filter=${filterValue}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setTransactions(res.data);

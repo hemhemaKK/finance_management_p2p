@@ -40,7 +40,7 @@ export default function Login() {
 
       <div style={{ textAlign: "center", margin: "1rem 0" }}>OR</div>
 
-      <a href="http://localhost:5000/api/auth/google" style={{ textDecoration: "none" }}>
+      <a href="https://personal-finance-p2p-backend.onrender.com/api/auth/google" style={{ textDecoration: "none" }}>
         <button style={googleButtonStyle}>Login with Google</button>
       </a>
     </div>

@@ -22,7 +22,7 @@ const TransactionTracker = () => {
   // Fetch user's wallet balance
   const fetchUserBalance = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/profile", {
+      const res = await axios.get("https://personal-finance-p2p-backend.onrender.com/api/profile", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setWalletBalance(res.data.user.walletBalance);
@@ -34,7 +34,7 @@ const TransactionTracker = () => {
   // Fetch transactions
   const fetchTransactions = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/payment/transactions", {
+      const res = await axios.get("https://personal-finance-p2p-backend.onrender.com/api/payment/transactions", {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -69,7 +69,7 @@ const TransactionTracker = () => {
   // Fetch category list from backend
   const fetchCategories = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/payment/categories", {
+      const res = await axios.get("https://personal-finance-p2p-backend.onrender.com/api/payment/categories", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setCategoryList(res.data);
@@ -88,7 +88,7 @@ const TransactionTracker = () => {
   const saveEdit = async (id) => {
     try {
       await axios.put(
-        `http://localhost:5000/api/payment/update-category/${id}`,
+        `https://personal-finance-p2p-backend.onrender.com/api/payment/update-category/${id}`,
         { category: editCategory },
         { headers: { Authorization: `Bearer ${token}` } }
       );

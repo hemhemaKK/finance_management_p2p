@@ -11,7 +11,7 @@ export default function Sidebar({ activeSection, setActiveSection }) {
     const fetchProfile = async () => {
       if (!token) return;
       try {
-        const res = await axios.get("http://localhost:5000/api/profile", {
+        const res = await axios.get("https://personal-finance-p2p-backend.onrender.com/api/profile", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUser(res.data.user);

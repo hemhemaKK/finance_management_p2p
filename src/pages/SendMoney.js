@@ -14,7 +14,7 @@ const SendMoney = () => {
       if (!receiverEmail) return setSuggestions([]);
       try {
         const res = await axios.get(
-          `http://localhost:5000/api/payment/search-users?q=${receiverEmail}`
+          `https://personal-finance-p2p-backend.onrender.com/api/payment/search-users?q=${receiverEmail}`
         );
         setSuggestions(res.data.users);
       } catch (err) {
@@ -39,7 +39,7 @@ const SendMoney = () => {
       const senderId = JSON.parse(atob(token.split(".")[1])).id;
 
       const res = await axios.post(
-        "http://localhost:5000/api/payment/create-order",
+        "https://personal-finance-p2p-backend.onrender.com/api/payment/create-order",
         {
           senderId,
           receiverId: selectedUser._id,
@@ -62,7 +62,7 @@ const SendMoney = () => {
         order_id: order.id,
         handler: async function (response) {
           await axios.post(
-            "http://localhost:5000/api/payment/success",
+            "https://personal-finance-p2p-backend.onrender.com/api/payment/success",
             {
               transactionId,
               razorpayPaymentId: response.razorpay_payment_id,
