@@ -10,8 +10,15 @@ import SendMoney from "./pages/SendMoney";
 import ReceivedMoney from "./pages/BudgetPlan";
 import Budget from "./pages/SchedulePayment";
 import ProfileSettings from "./pages/ProfileSettings";
+import { useEffect } from "react";
 
 function App() {
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_API_URL}/api/users`)
+      .then(res => res.json())
+      .then(data => console.log(data));
+  }, []);
+
   return (
     <Router>
       <Routes>
