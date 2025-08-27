@@ -1,18 +1,29 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { FaBars, FaTimes } from "react-icons/fa";
 
 export default function Navbar() {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const isMobile = windowWidth <= 768;
 
   // Reusable HoverLink (button-like)
   const HoverLink = ({ to, children }) => {
     const [hover, setHover] = useState(false);
     const style = {
-      color: "white",
-      marginLeft: "2rem",
+      color: "black",
+      marginLeft: isMobile ? "0" : "1rem",
       textDecoration: "none",
       fontSize: "16px",
       fontWeight: "bold",
-      backgroundColor: "#00484bff",
+      backgroundColor: "#fbfbfbff",
       padding: "6px 12px",
       borderRadius: "5px",
       boxShadow: hover
@@ -22,6 +33,7 @@ export default function Navbar() {
       transition: "all 0.3s ease",
       cursor: "pointer",
       display: "inline-block",
+      marginBottom: isMobile ? "10px" : "0",
     };
     return (
       <Link
@@ -29,6 +41,7 @@ export default function Navbar() {
         style={style}
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
+        onClick={() => isMobile && setMenuOpen(false)}
       >
         {children}
       </Link>
@@ -39,13 +52,13 @@ export default function Navbar() {
   const SimpleLink = ({ to, children }) => {
     const [hover, setHover] = useState(false);
     const style = {
-      color: hover ? "#0c6700ff" : "black",
-      marginLeft: "3rem",
-      marginRight:"2rem",
-      textDecoration: hover ?"underline":"none",
+      color: hover ? "#a2a2a2ff" : "white",
+      marginLeft: isMobile ? "0" : "2rem",
+      textDecoration: hover ? "underline" : "none",
       fontSize: "18px",
       fontWeight: "bold",
       transition: "all 0.3s ease",
+      marginBottom: isMobile ? "10px" : "0",
     };
     return (
       <Link
@@ -53,10 +66,26 @@ export default function Navbar() {
         style={style}
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
+        onClick={() => isMobile && setMenuOpen(false)}
       >
         {children}
       </Link>
     );
+  };
+
+  // Mobile menu style
+  const mobileMenuStyle = {
+    display: isMobile && menuOpen ? "flex" : "none",
+    flexDirection: "column",
+    position: "absolute",
+    top: "70px",
+    left: 0,
+    width: "100%",
+    backgroundColor: "#090909dd",
+    padding: "1rem 0",
+    boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
+    zIndex: 1000,
+    alignItems: "center",
   };
 
   return (
@@ -71,25 +100,49 @@ export default function Navbar() {
             height: "60px",
             width: "60px",
             objectFit: "cover",
-            borderRadius:"50%",
+            borderRadius: "50%",
             transition: "transform 0.3s ease",
           }}
         />
       </Link>
-      <div style={{ display: "flex", alignItems: "center" }}>
-        <SimpleLink to="/">Home</SimpleLink>
-        <SimpleLink to="/about">About Us</SimpleLink>
-        <HoverLink to="/login">Login</HoverLink>
-        <HoverLink to="/register">Sign Up</HoverLink>
-      </div>
+
+      {/* Desktop & Mobile Links */}
+      {isMobile ? (
+        <>
+          <div onClick={() => setMenuOpen(!menuOpen)} style={hamburgerStyle}>
+            {menuOpen ? <FaTimes size={25} /> : <FaBars size={25} />}
+          </div>
+          <div style={mobileMenuStyle}>
+            <SimpleLink to="/">Home</SimpleLink>
+            <SimpleLink to="/about">About Us</SimpleLink>
+            <HoverLink to="/login">Login</HoverLink>
+            <HoverLink to="/register">Sign Up</HoverLink>
+          </div>
+        </>
+      ) : (
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <SimpleLink to="/">Home</SimpleLink>
+          <SimpleLink to="/about">About Us</SimpleLink>
+          <HoverLink to="/login">Login</HoverLink>
+          <HoverLink to="/register">Sign Up</HoverLink>
+        </div>
+      )}
     </nav>
   );
 }
 
+// Styles
 const navStyle = {
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
-  padding: "0.3rem 3rem",
-  backgroundColor: "#ffffffbb",
+  padding: "0.5rem 3rem",
+  backgroundColor: "#00484bff",
+  position: "relative",
+  zIndex: 999,
+};
+
+const hamburgerStyle = {
+  cursor: "pointer",
+  color: "white",
 };

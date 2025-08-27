@@ -9,12 +9,25 @@ export default function About() {
     { name: "Sanjay", role: "Backend Engineer", img: "/assets/p3.png" },
   ];
 
+  // Responsive font & spacing helpers
+  const responsiveText = (desktop, tablet, mobile) => ({
+    fontSize: desktop,
+    '@media (max-width: 1024px)': { fontSize: tablet },
+    '@media (max-width: 768px)': { fontSize: mobile },
+  });
+
+  const responsivePadding = (desktop, tablet, mobile) => ({
+    padding: desktop,
+    '@media (max-width: 1024px)': { padding: tablet },
+    '@media (max-width: 768px)': { padding: mobile },
+  });
+
   return (
     <>
       <Navbar />
 
-      {/* Video Background with Blur and Overlay */}
       <div style={{ position: "relative", overflow: "hidden" }}>
+        {/* Background Video */}
         <video
           autoPlay
           loop
@@ -26,7 +39,7 @@ export default function About() {
             width: "100%",
             height: "100%",
             objectFit: "cover",
-            filter: "blur(8px) brightness(0.5)", // ✅ blur + darken
+            filter: "blur(8px) brightness(0.5)",
             zIndex: -2,
           }}
         >
@@ -34,32 +47,57 @@ export default function About() {
           Your browser does not support the video tag.
         </video>
 
-        {/* Optional: Dark Overlay for stronger contrast */}
-        <div style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          backgroundColor: "rgba(0,0,0,0.3)",
-          zIndex: -1
-        }} />
+        {/* Dark Overlay */}
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            backgroundColor: "rgba(0,0,0,0.3)",
+            zIndex: -1,
+          }}
+        />
 
-        {/* Content Overlay */}
-        <div style={{ fontFamily: "Arial, sans-serif", padding: "20px", color: "white", position: "relative", zIndex: 1 }}>
-          
+        {/* Main Content */}
+        <div
+          style={{
+            fontFamily: "Arial, sans-serif",
+            padding: "60px 40px",
+            color: "white",
+            position: "relative",
+            zIndex: 1,
+          }}
+        >
           {/* Website Intro */}
           <motion.div
             initial={{ opacity: 0, y: -50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1 }}
-            style={{ textAlign: "center", marginBottom: "40px" }}
+            style={{
+              textAlign: "center",
+              marginBottom: "60px",
+            }}
           >
-            <h1 style={{ fontSize: "3rem", fontWeight: "bold" }}>
-              <br />🌟 About Our Website
+            <h1
+              style={{
+                fontSize: "3rem",
+                fontWeight: "bold",
+                marginBottom: "20px",
+              }}
+            >
+              🌟 About Our Website
             </h1>
-            <p style={{ fontSize: "1.2rem", marginTop: "50px", maxWidth: "800px", marginInline: "auto" }}>
-              Welcome to <b>Our Platform</b><br /> 🚀 — a place built with passion to empower people.  
+            <p
+              style={{
+                fontSize: "1.2rem",
+                maxWidth: "800px",
+                marginInline: "auto",
+                lineHeight: "1.6",
+              }}
+            >
+              Welcome to <b>Our Platform</b> 🚀 — a place built with passion to empower people.  
               Our mission is to simplify learning, connect communities, and provide innovative digital experiences.  
               From smooth user journeys to exciting features, we focus on making tech more human-friendly.
             </p>
@@ -75,8 +113,6 @@ export default function About() {
               gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
               gap: "20px",
               marginBottom: "60px",
-              marginLeft: "50px",
-              marginRight: "50px",
             }}
           >
             {[
@@ -91,14 +127,14 @@ export default function About() {
                 style={{
                   padding: "20px",
                   borderRadius: "15px",
-                  background: "rgba(255, 255, 255, 1)", // semi-transparent to show video behind
+                  background: "rgba(255, 255, 255, 0.95)",
                   boxShadow: "0px 8px 20px rgba(0,0,0,0.2)",
                   textAlign: "center",
                   color: "black",
                 }}
               >
                 <h2 style={{ fontSize: "1.5rem", marginBottom: "10px" }}>{benefit.title}</h2>
-                <p>{benefit.desc}</p>
+                <p style={{ fontSize: "1rem", lineHeight: "1.5" }}>{benefit.desc}</p>
               </motion.div>
             ))}
           </motion.div>
@@ -108,7 +144,7 @@ export default function About() {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+              gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
               gap: "20px",
               maxWidth: "1000px",
               margin: "auto",
@@ -123,7 +159,7 @@ export default function About() {
                   padding: "20px",
                   borderRadius: "20px",
                   background: "rgba(0,0,0,0.6)",
-                  boxShadow: "0px 10px 25px rgba(255, 255, 255, 1)",
+                  boxShadow: "0px 10px 25px rgba(255, 255, 255, 0.1)",
                   textAlign: "center",
                   color: "white",
                 }}
@@ -147,6 +183,7 @@ export default function About() {
           </div>
         </div>
       </div>
+
       <Footer />
     </>
   );
