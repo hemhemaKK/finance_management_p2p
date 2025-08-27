@@ -56,7 +56,7 @@ export default function Sidebar({ activeSection, setActiveSection }) {
 
       {/* Menu Links */}
       <div style={{ marginTop: "0.8rem", flex: 1 }}>
-        {["Dashboard", "Expense & Income Tracking", "Transaction History", "Money Transfers", "Budget Plan", "Scheduled Payments"].map((menu) => (
+        {["Dashboard", "Expense & Income Tracking", "Transaction History", "Money Transfers", "Budget Plan", "Support"].map((menu) => (
           <div
             key={menu}
             style={linkStyle(menu)}

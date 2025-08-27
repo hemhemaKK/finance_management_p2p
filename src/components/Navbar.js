@@ -62,19 +62,23 @@ export default function Navbar() {
   return (
     <nav style={navStyle}>
       <Link to="/">
-        <img src="/assets/logo1.png" alt="P2P Finance Logo" style={{
-      height: "60px",
-      width: "60px",
-      objectFit: "cover",
-      clipPath: "polygon(25% 5%, 75% 5%, 100% 50%, 75% 95%, 25% 95%, 0% 50%)",
-      transition: "transform 0.3s ease",
-    }} />
+        <video
+          src="/assets/logo.mp4"
+          autoPlay
+          loop
+          muted
+          style={{
+            height: "60px",
+            width: "60px",
+            objectFit: "cover",
+            borderRadius:"50%",
+            transition: "transform 0.3s ease",
+          }}
+        />
       </Link>
       <div style={{ display: "flex", alignItems: "center" }}>
         <SimpleLink to="/">Home</SimpleLink>
         <SimpleLink to="/about">About Us</SimpleLink>
-        <SimpleLink to="/contact">Contact Us</SimpleLink>
-
         <HoverLink to="/login">Login</HoverLink>
         <HoverLink to="/register">Sign Up</HoverLink>
       </div>

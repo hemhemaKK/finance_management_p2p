@@ -14,7 +14,7 @@ const TransactionHistory = () => {
           headers: { Authorization: `Bearer ${token}` },
         });
         const user = profileRes.data.user;
-        setUserId(user._id);
+        setUserId(user?._id || "");
 
         fetchTransactions(filter, token);
       } catch (err) {
@@ -30,7 +30,7 @@ const TransactionHistory = () => {
         `https://personal-finance-p2p-backend.onrender.com/api/payment/transactions?filter=${filterValue}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      setTransactions(res.data);
+      setTransactions(res.data || []);
     } catch (err) {
       console.error(err);
     }
@@ -43,15 +43,15 @@ const TransactionHistory = () => {
 
   const handleDownload = () => {
     const csvContent = [
-      ["Date", "Time","Received Amount", "Sent Amount", "From", "To", "Status", "Balance After"],
+      ["Date", "Time", "Received Amount", "Sent Amount", "From", "To", "Status", "Balance After"],
       ...transactions.map((tx) => [
         new Date(tx.createdAt).toLocaleString(),
-        tx.receiver._id === userId ? tx.amount : "",
-        tx.sender._id === userId ? tx.amount : "",
-        tx.sender.name,
-        tx.receiver.name,
-        tx.status,
-        tx.balanceAfter,
+        tx.receiver?._id === userId ? tx.amount : "",
+        tx.sender?._id === userId ? tx.amount : "",
+        tx.sender?.name || "Unknown",
+        tx.receiver?.name || "Unknown",
+        tx.status || "N/A",
+        tx.balanceAfter ?? "N/A",
       ]),
     ]
       .map((e) => e.join(","))
@@ -68,7 +68,8 @@ const TransactionHistory = () => {
   };
 
   const handlePrint = () => {
-    const printContent = document.getElementById("transaction-table").outerHTML;
+    const printContent = document.getElementById("transaction-table")?.outerHTML;
+    if (!printContent) return;
     const newWin = window.open("");
     newWin.document.write(
       `<html><head><title>Transaction Statement</title></head><body style="font-family:sans-serif;">`
@@ -121,61 +122,48 @@ const TransactionHistory = () => {
           </thead>
           <tbody>
             {transactions.map((tx) => {
-              const isSent = tx.sender._id === userId;
-              const isReceived = tx.receiver._id === userId;
+              const isSent = tx.sender?._id === userId;
+              const isReceived = tx.receiver?._id === userId;
               return (
                 <tr
                   key={tx._id}
                   style={{
                     ...trStyle,
-                    backgroundColor: isReceived ? "#d4efdf" : isSent ? "#f9ebea" : "#ffffff", // green for received, red for sent
+                    backgroundColor: isReceived ? "#d4efdf" : isSent ? "#f9ebea" : "#ffffff",
                     transition: "all 0.3s ease",
                   }}
-                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#f1f1f1")} // hover for row
+                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#f1f1f1")}
                   onMouseLeave={(e) =>
-                  (e.currentTarget.style.backgroundColor = isReceived
-                    ? "#dafae7ff"
-                    : isSent
+                    (e.currentTarget.style.backgroundColor = isReceived
+                      ? "#dafae7ff"
+                      : isSent
                       ? "#f6dad8ff"
                       : "#ffffff")
                   }
                 >
                   <td style={tdStyle}>{new Date(tx.createdAt).toLocaleString()}</td>
-                  <td
-                    style={{
-                      ...tdStyle,
-                      color: "#000000ff",
-                      fontWeight: "bold",
-                   }}
-                  >
+                  <td style={{ ...tdStyle, color: "#000", fontWeight: "bold" }}>
                     {isReceived ? tx.amount : "-"}
                   </td>
-                  <td
-                    style={{
-                      ...tdStyle,
-                      color: "#080808ff",
-                      fontWeight: "bold",
-                     }}
-                  >
+                  <td style={{ ...tdStyle, color: "#080808", fontWeight: "bold" }}>
                     {isSent ? tx.amount : "-"}
                   </td>
-                  <td style={tdStyle}>{tx.sender.name}</td>
-                  <td style={tdStyle}>{tx.receiver.name}</td>
+                  <td style={tdStyle}>{tx.sender?.name || "Unknown"}</td>
+                  <td style={tdStyle}>{tx.receiver?.name || "Unknown"}</td>
                   <td
                     style={{
                       ...tdStyle,
-                      color: tx.status === "success" ? "#238801ff" : "#c0392b",
+                      color: tx.status === "success" ? "#238801" : "#c0392b",
                       fontWeight: "bold",
                     }}
                   >
-                    {tx.status}
+                    {tx.status || "N/A"}
                   </td>
-                  <td style={tdStyle}>{tx.balanceAfter}</td>
+                  <td style={tdStyle}>{tx.balanceAfter ?? "N/A"}</td>
                 </tr>
               );
             })}
           </tbody>
-
         </table>
       )}
     </div>
@@ -200,12 +188,7 @@ const filterContainerStyle = {
   flexWrap: "wrap",
 };
 const labelStyle = { fontWeight: "bold", marginRight: "10px", color: "#333" };
-const selectStyle = {
-  padding: "6px 12px",
-  borderRadius: "5px",
-  border: "1px solid #ccc",
-  background: "#fafafa",
-};
+const selectStyle = { padding: "6px 12px", borderRadius: "5px", border: "1px solid #ccc", background: "#fafafa" };
 const buttonStyle = {
   padding: "10px 18px",
   borderRadius: "6px",
@@ -216,22 +199,10 @@ const buttonStyle = {
   fontWeight: "bold",
   transition: "0.3s",
 };
-const tableStyle = {
-  width: "100%",
-  borderCollapse: "collapse",
-  borderRadius: "8px",
-  overflow: "hidden",
-  boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
-};
-const theadStyle = {
-  background: "linear-gradient(to right, #2980b9, #3498db)",
-  color: "#fff",
-};
-const thStyle = { padding: "12px 10px", textAlign: "center",
-                      fontWeight: "bold", };
-const tdStyle = { padding: "10px", textAlign: "center",
-                      fontWeight: "bold", };
-const trStyle = { borderBottom: "1px solid #ddd", cursor: "pointer",
-                      fontWeight: "bold", };
+const tableStyle = { width: "100%", borderCollapse: "collapse", borderRadius: "8px", overflow: "hidden", boxShadow: "0 2px 10px rgba(0,0,0,0.1)" };
+const theadStyle = { background: "linear-gradient(to right, #2980b9, #3498db)", color: "#fff" };
+const thStyle = { padding: "12px 10px", textAlign: "center", fontWeight: "bold" };
+const tdStyle = { padding: "10px", textAlign: "center", fontWeight: "bold" };
+const trStyle = { borderBottom: "1px solid #ddd", cursor: "pointer", fontWeight: "bold" };
 
 export default TransactionHistory;

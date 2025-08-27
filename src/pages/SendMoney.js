@@ -133,6 +133,9 @@ const SendMoney = () => {
         <option value="personal">Personal</option>
         <option value="gift">Gift</option>
         <option value="payment">Payment</option>
+        <option value="groceries">Groceries</option>
+        <option value="shopping">Shopping</option>
+        <option value="other">Other</option>
       </select>
 
       <button
